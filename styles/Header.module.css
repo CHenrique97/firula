@@ -1,0 +1,13 @@
+.header{
+    display:flex;
+    justify-content: space-between;
+    padding-top: 8px;
+}
+
+.user{
+  display: flex;
+}
+
+.image{
+    border-radius: 3px;
+}
