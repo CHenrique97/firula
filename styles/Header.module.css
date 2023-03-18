@@ -11,3 +11,17 @@
 .image{
     border-radius: 3px;
 }
+.textBox {
+  width: 200px;
+  margin-top: -8px;
+}
+
+.textBox p {
+  margin-right: 8px;
+  word-wrap: break-word;
+}
+.textBox h3 {
+  margin-bottom: -16px;
+  text-align: center;
+  word-wrap: break-word;
+}

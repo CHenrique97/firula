@@ -1,0 +1,12 @@
+.MainCard{
+    border:  1px solid grey;
+    margin-right: 8px;
+    width: 400px;
+    
+}
+
+.MainCard:hover,
+.MainCard:focus,
+.MainCard:active {
+  border-color: rgb(45, 44, 44);
+}
