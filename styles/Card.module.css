@@ -10,3 +10,9 @@
 .card img{
     padding: 16px;
 }
+
+.card:hover,
+.card:focus,
+.card:active {
+  border-color: rgb(255, 252, 252);
+}

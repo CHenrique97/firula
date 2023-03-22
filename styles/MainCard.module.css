@@ -2,11 +2,24 @@
     border:  1px solid grey;
     margin-right: 8px;
     width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: auto;
+    padding-bottom: 8px;
     
+}
+
+.MainCard img {
+  height: 300px;
+  width: 300px;
 }
 
 .MainCard:hover,
 .MainCard:focus,
 .MainCard:active {
-  border-color: rgb(45, 44, 44);
+  border-color: rgb(255, 252, 252);
 }

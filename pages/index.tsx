@@ -1,3 +1,4 @@
+
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -23,13 +24,16 @@ const Home: NextPage = () => {
       </Head>
       <Header User='John Doe' Description='Very nice description and is also big' url=''/> 
       <main className={styles.main}>    
+      <div>
+        <p> You have x courts reserved, the next is match is day </p>
+      </div>
         <div>
-        <MainCard {...mock}></MainCard>
+          <MainCard {...mock}></MainCard>
         </div>
         <div >
-        <Card {...mock}></Card>
-        <Card {...mock}></Card>
-        <Card {...mock}></Card>
+          <Card {...mock}></Card>
+          <Card {...mock}></Card>
+          <Card {...mock}></Card>
         </div>
       </main>
 
