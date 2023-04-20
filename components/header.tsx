@@ -12,7 +12,7 @@ interface fieldProps {
 
 export const Header : FC<fieldProps> = ({User,Description,url}) => {
     return <header className={styles.header}>
-    <h1>Firula</h1>
+    <h1>WeMatch</h1>
      <div className={styles.user}>
      <div className={styles.textBox} >
         <h3>{User}</h3>
