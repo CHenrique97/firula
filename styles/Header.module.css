@@ -25,3 +25,16 @@
   text-align: center;
   word-wrap: break-word;
 }
+
+.modal {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  right: 25px;
+  border: 3px, solid, white;
+  background-color: rgb(79, 78, 78);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -31,6 +31,6 @@ export async function validateUser(request: ValidateUserRequest): Promise<boolea
 }
 //todo
 export async function getUser(user:string,password: string): Promise<User> {
-  const response = await axios.get<User>(`${userServiceUrl}/users/${userId}`);
-  return response.data;
+    const response = await axios.post<User>(`${userServiceUrl}/getUser`, { user, password });
+    return response.data;
 }
