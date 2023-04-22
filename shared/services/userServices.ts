@@ -6,6 +6,11 @@ export interface User {
     email: string;
     password: string;
   }
+
+  export interface RequestUser{
+    user: string;
+    password: string;
+  }
   
   export interface CreateUserRequest {
     name: string;
@@ -31,6 +36,9 @@ export async function validateUser(request: ValidateUserRequest): Promise<boolea
 }
 //todo
 export async function getUser(user:string,password: string): Promise<User> {
-    const response = await axios.post<User>(`${userServiceUrl}/getUser`, { user, password });
+    const response = await axios.post<User>("http://localhost:3030/getUser",  {
+      "Email":user,
+      "Password": password
+     });
     return response.data;
 }
