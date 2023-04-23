@@ -1,15 +1,19 @@
-import create, { createStore } from 'zustand';
+import create from 'zustand';
 
-interface StoreState {
+export interface StoreState {
   username: string;
   uuid: string;
-  setUsername: () => void;
+  loginModal: boolean;
+  setUsername: () => void ;
   setUUID: () => void;
+  setLoginModal: () => void;
 }
 
-const useStore = createStore<StoreState>((set) => ({
+ export const useLoginStore = create<StoreState>((set) => ({
 username: '',
 uuid: '',
+loginModal: false,
+setLoginModal: () => set((state) => ({ ...state,loginModal:!state.loginModal})),
 setUsername: () => set((state) => ({ username: state.username})),
 setUUID: () => set((state) => ({ uuid: state.uuid})),
 }));

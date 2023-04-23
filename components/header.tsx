@@ -1,31 +1,33 @@
-import { FC, useState } from "react";
+import { FC, use, useEffect, useState } from "react";
 import Image from "next/image";
 import picPlaceholder from "../public/userIcon.jpg"
 import styles from "../styles/Header.module.css"
 import React from 'react';
 import { getUser } from "../shared/services/userServices";
-
+import { useLoginStore } from "../shared/utils/zustandStore";
 interface fieldProps {
     User: string,
     Description: string,
     url: string
 }
 
-interface userProps {
-    username: string,
-    password: string
+
+
+const userInfo = {
+  username: '',
+uuid: '',
+loginModal: false,
 }
-
-
 const sendLogin = async (user: userProps) => {
   const response = await getUser(user.username,user.password);
-  console.log(response);
+  useLoginStore.setState({loginModal: false})
 }
-const openModal = (user: string,password: string, handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> | undefined,handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> | undefined) => {
 
+const openModal = (user: string,password: string, handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> | undefined,handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> | undefined, handleModal: any,) => {
     return  <>  
            <div className={styles.modal}>
       <div className="modal-content">
+        <span className="close" onClick={()=> handleModal()}>&times;</span>
         <h2>Login</h2>
 
           <label>
@@ -47,10 +49,16 @@ const openModal = (user: string,password: string, handleUsernameChange: React.Ch
 
 }
 
-export const Header : FC<fieldProps> = ({User,Description}) => {    
-    const [showModal, setShowModal] = useState(false);
+export const Header : FC<fieldProps> = ({User,Description}) => {
+
+  const loginState = useLoginStore((state) => state.loginModal)
+  const handleClick =useLoginStore((state) => state.setLoginModal)
+
+
+  
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
       };
@@ -64,11 +72,11 @@ export const Header : FC<fieldProps> = ({User,Description}) => {
     <h1>WeMatch</h1>
      <div className={styles.user}>
      <div className={styles.textBox} >
-        <h3>{User}</h3>
+        <h3>{username}</h3>
         <p>{Description}</p>
      </div>
-     { openModal(username,password,handleUsernameChange,handlePasswordChange)}
-     <Image className={styles.image} src={picPlaceholder} alt="Profile pic" width={75} height={75} ></Image>
+     { loginState ? openModal(username,password,handleUsernameChange,handlePasswordChange,handleClick) : null}
+     <Image className={styles.image} src={picPlaceholder} alt="Profile pic" width={75} height={75} onClick={()=> handleClick()}></Image>
      </div>
      </header>
      
