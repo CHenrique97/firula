@@ -3,8 +3,11 @@ import Image from "next/image";
 import picPlaceholder from "../public/userIcon.jpg"
 import styles from "../styles/Header.module.css"
 import React from 'react';
+import { parse } from 'cookie';
+
 import { getUser } from "../shared/services/userServices";
 import { useLoginStore } from "../shared/utils/zustandStore";
+import { decodeJWTFromCookie } from "../shared/utils/jwtDecoder";
 interface fieldProps {
     User: string,
     Description: string,
@@ -20,7 +23,8 @@ loginModal: false,
 }
 const sendLogin = async (user: userProps) => {
   const response = await getUser(user.username,user.password);
-  useLoginStore.setState({loginModal: false})
+  useLoginStore.setState({username: response.Name, uuid: response.ID, loginModal: false})
+  console.log(response)
 }
 
 const openModal = (user: string,password: string, handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> | undefined,handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> | undefined, handleModal: any,) => {
@@ -52,6 +56,7 @@ const openModal = (user: string,password: string, handleUsernameChange: React.Ch
 export const Header : FC<fieldProps> = ({User,Description}) => {
 
   const loginState = useLoginStore((state) => state.loginModal)
+  const user = useLoginStore((state) => state.username)
   const handleClick =useLoginStore((state) => state.setLoginModal)
 
 
@@ -72,7 +77,7 @@ export const Header : FC<fieldProps> = ({User,Description}) => {
     <h1>WeMatch</h1>
      <div className={styles.user}>
      <div className={styles.textBox} >
-        <h3>{username}</h3>
+        <h3>{user}</h3>
         <p>{Description}</p>
      </div>
      { loginState ? openModal(username,password,handleUsernameChange,handlePasswordChange,handleClick) : null}

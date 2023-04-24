@@ -2,9 +2,10 @@ import axios from "axios";
 
 const userServiceUrl = process.env.USER_SERVICE_URL;
 export interface User {
-    name: string;
-    email: string;
-    password: string;
+    Name: string;
+    Email: string;
+    Password?: string;
+    ID: string
   }
 
   export interface RequestUser{
@@ -31,14 +32,19 @@ export async function createUser(request: CreateUserRequest): Promise<User> {
 }
 //todo
 export async function validateUser(request: ValidateUserRequest): Promise<boolean> {
-  const response = await axios.get<boolean>(`${userServiceUrl}/users/validate`, { params: request });
-  return response.data;
+  const verifiedRequest = await axios.get("http://localhost:3030/validate", );
+  return verifiedRequest.data.message;
 }
-//todo
-export async function getUser(user:string,password: string): Promise<User> {
-    const response = await axios.post<User>("http://localhost:3030/getUser",  {
+export async function getUser(user:string,password: string): Promise<User>{
+  axios.defaults.withCredentials = true;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const response = await axios.post("http://localhost:3030/getUser",  {
       "Email":user,
       "Password": password
      });
-    return response.data;
+     const verifiedRequest = await axios.get("http://localhost:3030/validate", );
+     console.log(verifiedRequest.data.message)
+     //parse the response
+     
+    return verifiedRequest.data.message;
 }
